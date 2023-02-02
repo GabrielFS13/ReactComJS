@@ -1,0 +1,3 @@
+npx create-react-app <nome-do-app>
+
+npm start --inicializa a aplicação
