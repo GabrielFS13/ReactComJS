@@ -1,6 +1,6 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
+  "short_name": "Organograma dos Homies",
+  "name": "Organograma para criar um time pra cada joguin, feito durante um curso da Alura",
   "icons": [
     {
       "src": "favicon.ico",

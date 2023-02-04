@@ -5,37 +5,31 @@ import Botao from '../Botao';
 import { useState } from 'react';
 
 const Formulario = (props) =>{
-    const times = [
-        'Programação',
-        'Front-End',
-        'Data Science',
-        "Devops",
-        'UX e Design',
-        'Mobile',
-        'Inovação e Gestão'
-    ]
 
     const [nome, setNome] = useState('')
-    const [cargo, setCargo] = useState('')
+    const [nick, setnick] = useState('')
     const [img, setImg] = useState('')
     const [time, setTime] = useState('')
-
-
 
     const aoSalvar = (e) =>{
         e.preventDefault()
         props.aoCadastrar({
             nome,
-            cargo,
+            nick,
             img,
             time
         })
+
+        setNome('')
+        setnick('')
+        setImg('')
+        
 
     }
     return (
         <section className="formulario">
             <form onSubmit={aoSalvar}>
-                <h2>Preencha os dados para criar o card do colaborador</h2>
+                <h2>Preencha os dados para criar o card do "homie"</h2>
                 <CampoTexto 
                     obrigatorio={true}
                     label="Nome" 
@@ -45,23 +39,23 @@ const Formulario = (props) =>{
 
                 <CampoTexto 
                     obrigatorio={true} 
-                    label="Cargo" 
-                    placeholder="Digite o seu Cargo"
-                    valor={cargo}
-                    aoAlterado={valor => setCargo(valor)}/>
+                    label="Nick" 
+                    placeholder="Digite o seu Nickaname"
+                    valor={nick}
+                    aoAlterado={valor => setnick(valor)}/>
 
                 <CampoTexto 
                     obrigatorio={false} 
-                    label="Imagem"
-                    placeholder="Digite o endereço da imagem"
+                    label="Fotinha"
+                    placeholder="Digite o endereço da sua fotinha (https://..."
                     valor={img}
                     aoAlterado={valor => setImg(valor)}/>
 
                 <ListaSuspensa 
                     label="Time"
-                    itens={times} 
+                    itens={props.times} 
                     obrigatorio={true}
-                    valor = {time}
+                    valor={time}
                     aoAlterado = {valor => setTime(valor)}
                      />
                 <Botao>Criar Card</Botao>
