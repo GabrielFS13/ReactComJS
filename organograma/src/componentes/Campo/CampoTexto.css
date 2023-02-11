@@ -18,3 +18,8 @@
     padding: 24px;
     box-sizing: border-box;
 }
+
+.campo-color input{
+    height: 50px;
+    padding: 5px 24px;
+}
