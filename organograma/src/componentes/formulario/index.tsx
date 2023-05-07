@@ -4,32 +4,42 @@ import ListaSuspensa from '../ListaSuspensa';
 import Botao from '../Botao';
 import { useState } from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { IColaborador } from '../../compartilhado/interfaces/IColaborador';
 
+interface FormularioProps{
+    times: string[],
+    novoTime: (obj: {nome: string, cor: string}) => void,
+    aoCadastrar: (obj: IColaborador) => void
+}
 
-const Formulario = (props) =>{
+const Formulario = (props: FormularioProps) =>{
 
     const [nome, setNome] = useState('')
     const [nick, setnick] = useState('')
     const [img, setImg] = useState('')
     const [time, setTime] = useState('')
+    const [data, setData] = useState('')
 
     const [novoTime, setNovo] = useState('')
     const [corTime, setCor] = useState('')
 
 
-    const aoSalvar = (e) =>{
+    const aoSalvar = (e: React.FormEvent<HTMLFormElement>) =>{
         e.preventDefault()
         props.aoCadastrar({
             id: uuidv4(),
             nome,
             nick,
             img,
-            time
+            time,
+            favorito: false,
+            data
         })
 
         setNome('')
         setnick('')
         setImg('')
+        setData('')
         
 
     }
@@ -60,6 +70,14 @@ const Formulario = (props) =>{
                     placeholder="Digite o endereço da sua fotinha https://..."
                     valor={img}
                     aoAlterado={valor => setImg(valor)}/>
+
+                <Campo
+                obrigatorio={true}
+                tipo={'date'}
+                label="Data"
+                placeholder='Data'
+                valor={data}
+                aoAlterado={ valor => setData(valor)} />
 
                 <ListaSuspensa 
                     label="Time"

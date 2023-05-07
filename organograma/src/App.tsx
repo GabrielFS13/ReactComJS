@@ -3,6 +3,7 @@ import Banner from './componentes/Banner';
 import Formulario from './componentes/formulario';
 import Time from './componentes/Time';
 import { v4 as uuidv4 } from 'uuid';
+import { IColaborador } from './compartilhado/interfaces/IColaborador';
 
 function App() {
 
@@ -34,32 +35,14 @@ function App() {
     }
 ])
 
-const inicial = [
-    { 
-      id: uuidv4(),
-      favorito: false,
-      nome: "Gabriel",
-      time: "Dead By Daylight",
-      nick: "Falcão",
-      img: "https://github.com/GabrielFS13.png"
-    },
-    { 
-      id: uuidv4(),
-      favorito: false,
-      nome: "Gabriel F",
-      time: "Minezera",
-      nick: "FalcãoShadow",
-      img: "https://github.com/GabrielFS13.png"
-    }
-]
 
-  const [colaboradores, setColaboradores] = useState(inicial)
+  const [colaboradores, setColaboradores] = useState<IColaborador[]>([])
 
-  function deletarColab(id){
+  function deletarColab(id: string){
     setColaboradores(colaboradores.filter(colaborador => colaborador.id !== id))
   }
 
-  function mudaCorTime(cor, id){
+  function mudaCorTime(cor: string, id: string){
     setTimes(times.map(time =>{
       if(time.id === id){
         time.cor = cor
@@ -69,24 +52,25 @@ const inicial = [
     }))
   }
 
-  function novoTime(novo){
-    setTimes([...times, {...novo, id: uuidv4}])
+  function novoTime(novo: {nome: string, cor: string}){
+
+    setTimes([...times,  {nome: novo.nome, cor: novo.cor, id: uuidv4()}])
+
   }
 
-  function aoFav(id){
+  function aoFav(id: string){
     setColaboradores(colaboradores.map(colaborador =>{
       if(colaborador.id === id) colaborador.favorito = !colaborador.favorito
       return colaborador
     }))
   }
 
-  const aoNovoColaborador = (colaborador) =>{
-    console.log(colaborador)
+  const aoNovoColaborador = (colaborador: IColaborador) => {
     setColaboradores([...colaboradores, colaborador])
   }
   return (
     <div className="App">
-      <Banner />
+      <Banner textoAlt='' endereco='/imagens/banner.png'/>
       <Formulario
                 aoCadastrar={colaborador => aoNovoColaborador(colaborador)} 
                 novoTime = {novoTime}

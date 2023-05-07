@@ -4,7 +4,18 @@ import {BsBookmarkHeartFill, BsBookmarkHeart} from 'react-icons/bs'
 
 import './Card.css'
 
-const Card = ({img, nome, cargo, corDeFundo, aoDeletar, id, favorito, aoFav}) =>{
+interface cardProps{
+    id: string,
+    img: string,
+    nome: string,
+    corDeFundo: string,
+    data: string
+    favorito: boolean,
+    aoDeletar: (id: string) => void,
+    aoFav: (id: string) => void
+}
+
+const Card = ({img, nome, data, corDeFundo, aoDeletar, id, favorito, aoFav}: cardProps) =>{
     function fav(){
         aoFav(id)
     }
@@ -25,7 +36,7 @@ const Card = ({img, nome, cargo, corDeFundo, aoDeletar, id, favorito, aoFav}) =>
             </div>
             <div className='rodape'>
                 <h4>{nome}</h4>
-                <h5>{cargo}</h5>
+                <h5>{new Date(data).toLocaleDateString()}</h5>
                 <div className='favoritar'>
                     {favorito 
                     ? <BsBookmarkHeartFill {...propsFav} color="#FF0000"/> 

@@ -1,6 +1,14 @@
 import './ListaSuspensa.css'
 
-const ListaSuspensa = (props) =>{
+interface listaProps{
+    label: string,
+    obrigatorio: boolean,
+    itens: string[],
+    valor: string,
+    aoAlterado: (valor: string) => void
+}
+
+const ListaSuspensa = (props: listaProps) =>{
      //Nas Label's use htmlFor, for é a palavara reservada para o loop lá, já o htmlFor é o for usado nas label's para focar o input
     return(
         <div className="lista-suspensa">
